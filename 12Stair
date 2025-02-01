@@ -36,3 +36,18 @@ int main()
         else if (str[i] == '9') cout << "99 Bottles of Beer on the Wall" << endl;
     }
 }
+
+- comma
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    string n;
+    cin >> n;
+    for (int i = n.size() - 3, c = 0; i > 0; i--, c++) {
+        if (c % 3 == 0) n.insert(i, ",");
+    }
+    cout << n;
+}
