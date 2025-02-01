@@ -1,0 +1,197 @@
+- alpha (Dataset, 0.01sec)
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+
+int main()
+{
+    int a = 65, b = 65, c = 65;
+    while (a != 90 || b != 90 || c != 90) {
+        printf("%c%c%c ", (char) a, (char) b, (char) c);
+        c++;
+        if (c > 90) { c = 65; b++; }
+        if (b > 90) { b = 65; a++; }
+    }
+    cout << "ZZZ ";
+}
+
+- HQ9+ (20 Cases, 0.12sec)
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    string n;
+    cin >> n;
+    string str;
+    for (int i = 0; i < n.size(); i++) {
+        str.push_back(toupper(n[i]));
+    }
+    for (int i = 0; i < str.size(); i++) {
+        if (str[i] == 'H') cout << "Hello, world!" << endl;
+        else if (str[i] == 'Q') cout << n << endl;
+        else if (str[i] == '9') cout << "99 Bottles of Beer on the Wall" << endl;
+    }
+}
+
+- differential
+- chemi
+- coci_trik
+
+- comma
+#include <iostream> (10 Cases, 0.06sec)
+
+using namespace std;
+
+int main()
+{
+    string n;
+    cin >> n;
+    for (int i = n.size() - 3, c = 0; i > 0; i--, c++) {
+        if (c % 3 == 0) n.insert(i, ",");
+    }
+    cout << n;
+}
+
+- mulofele (40 Cases, 0.43sec)
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int ec = 0, oc = 0;
+    string n;
+    cin >> n;
+    for (int i = n.size() - 1, c = 1; i >= 0; i--, c++) {
+        if (c % 2 == 0) ec += (n[i] - '0');
+        else oc += (n[i] - '0');
+    }
+    if ((ec - oc) % 11 == 0) cout << "yes";
+    else cout << "no";
+}
+
+- octal
+- worldcup
+- pandigital
+- counting_black
+- blur
+- treasure_hunt
+- ride
+- bouncy
+- radix
+
+- foo (Dataset, 0.01sec)
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    int pos;
+    vector<string> cases;
+    string str;
+    while (true) {
+        cin >> str;
+        if (cin.eof()) break;
+        cases.push_back(str);
+    }
+    for (auto k : cases) {
+        while (k.find("FOO") != string::npos) {
+            pos = k.find("FOO");
+            k[pos] = 'O';
+            k[pos + 1] = 'O';
+            k[pos + 2] = 'F';
+        }
+        cout << k << endl;
+    }
+}
+
+- todec
+- n_to_k_system
+- keyboard
+- allinall
+- ladder
+- sumofline
+
+- lookandsay (15 Cases, 0.07sec)
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n = 0;
+    char streakchar;
+    int streakcount = 0;
+    string str;
+    cin >> str;
+    while (n < str.size()) {
+        streakchar = str[n];
+        while (str[n] == streakchar) {
+            streakcount++;
+            n++;
+        }
+        cout << streakcount << streakchar;
+        streakcount = 0;
+    }
+}
+
+- clay (7 Cases, 0.04sec)
+#include <iostream>
+#include <stdio.h>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+bool comp(pair<string, int> a, pair<string, int> b) {
+    if (a.second == b.second) a.first < b.first;
+    return a.second > b.second;
+}
+
+int main()
+{
+    int s_cnt = 0;
+    int x, y, z;
+    string name;
+    cin >> s_cnt;
+    vector<pair<string, int>> students;
+    for (int i = 0; i < s_cnt; i++) {
+        cin >> x >> y >> z;
+        cin >> name;
+        students.push_back(make_pair(name, x * y * z));
+    }
+    sort(students.begin(), students.end(), comp);
+    cout << students[0].first << " took clay from " << students[students.size() - 1].first << ".";
+}
+
+- gift_giver
+- hard_to_believe
+- unreliable_msg
+- secret
+- to_and_fro
+- crypt
+- pstring
+
+- fa (4 Cases, 0.02sec)
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    string str;
+    cin >> str;
+    vector<int> fq;
+    fq.resize(26, 0);
+    for (auto k : str) { fq[k - 97]++; }
+    for (int i = 0; i < 26; i++) {
+        cout << (char) (i + 97) << ":" << fq[i] << endl;
+    }
+}
