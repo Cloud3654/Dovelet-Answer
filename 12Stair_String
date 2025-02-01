@@ -37,8 +37,8 @@ int main()
 - chemi
 - coci_trik
 
-- comma
-#include <iostream> (10 Cases, 0.06sec)
+- comma (10 Cases, 0.06sec)
+#include <iostream>
 using namespace std;
 int main()
 {
@@ -173,7 +173,7 @@ int main()
     cin >> str;
     vector<int> fq;
     fq.resize(26, 0);
-    for (auto k : str) { fq[k - 97]++; }
+    for (auto k : str) fq[k - 97]++;
     for (int i = 0; i < 26; i++) {
         cout << (char) (i + 97) << ":" << fq[i] << endl;
     }
@@ -186,7 +186,7 @@ using namespace std;
 int main()
 {
     string bin;
-    int dec;
+    int dec = 0;
     cin >> bin;
     for (int i = 0; i < 32; i += 8) {
         for (int j = 0; j < 8; j++) {
