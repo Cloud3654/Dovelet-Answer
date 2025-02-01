@@ -37,6 +37,10 @@ int main()
     }
 }
 
+- differential
+- chemi
+- coci_trik
+
 - comma
 #include <iostream>
 
@@ -51,3 +55,4 @@ int main()
     }
     cout << n;
 }
+
