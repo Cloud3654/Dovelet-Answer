@@ -197,3 +197,53 @@ int main()
     }
 }
 
+- histogram
+- reverse
+- esrever
+- number_guessing
+- mine
+- birth
+- fractodec
+- ISBN
+
+- mass (15 Cases, 0.08sec)
+#include <iostream>
+#include <vector>
+#include <ctype.h>
+using namespace std;
+int main()
+{
+    string formula;
+    cin >> formula;
+    vector<string> element;
+    int startpos;
+    for (int i = 0; i <= formula.size(); i++) {
+        if (isalpha(formula[i])) {
+            if (i) {
+                if (i == startpos) startpos--;
+                element.push_back(formula.substr(startpos, i - startpos));
+            }
+            startpos = i;
+        }
+    }
+    element.push_back(formula.substr(startpos, formula.size() - startpos));
+    double mass = 0;
+    for (string k : element) {
+        if (k.size() == 1) k.push_back('1');
+        switch (k[0]) {
+        case 'C':
+            mass += 12.01 * stoi(k.substr(1));
+            break;
+        case 'H':
+            mass += 1.008 * stoi(k.substr(1));
+            break;
+        case 'O':
+            mass += 16.00 * stoi(k.substr(1));
+            break;
+        case 'N':
+            mass += 14.01 * stoi(k.substr(1));
+            break;
+        }
+    }
+    printf("%.3f", mass);
+}
