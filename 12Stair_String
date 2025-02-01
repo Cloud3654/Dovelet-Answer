@@ -1,9 +1,7 @@
 - alpha (Dataset, 0.01sec)
 #include <iostream>
 #include <stdio.h>
-
 using namespace std;
-
 int main()
 {
     int a = 65, b = 65, c = 65;
@@ -19,9 +17,7 @@ int main()
 - HQ9+ (20 Cases, 0.12sec)
 #include <iostream>
 #include <string>
-
 using namespace std;
-
 int main()
 {
     string n;
@@ -43,9 +39,7 @@ int main()
 
 - comma
 #include <iostream> (10 Cases, 0.06sec)
-
 using namespace std;
-
 int main()
 {
     string n;
@@ -58,9 +52,7 @@ int main()
 
 - mulofele (40 Cases, 0.43sec)
 #include <iostream>
-
 using namespace std;
-
 int main()
 {
     int ec = 0, oc = 0;
@@ -87,9 +79,7 @@ int main()
 - foo (Dataset, 0.01sec)
 #include <iostream>
 #include <vector>
-
 using namespace std;
-
 int main()
 {
     int pos;
@@ -120,9 +110,7 @@ int main()
 
 - lookandsay (15 Cases, 0.07sec)
 #include <iostream>
-
 using namespace std;
-
 int main()
 {
     int n = 0;
@@ -146,14 +134,11 @@ int main()
 #include <stdio.h>
 #include <algorithm>
 #include <vector>
-
 using namespace std;
-
 bool comp(pair<string, int> a, pair<string, int> b) {
     if (a.second == b.second) a.first < b.first;
     return a.second > b.second;
 }
-
 int main()
 {
     int s_cnt = 0;
@@ -181,9 +166,7 @@ int main()
 - fa (4 Cases, 0.02sec)
 #include <iostream>
 #include <vector>
-
 using namespace std;
-
 int main()
 {
     string str;
@@ -195,3 +178,22 @@ int main()
         cout << (char) (i + 97) << ":" << fq[i] << endl;
     }
 }
+
+- ip_address (6 Cases, 0.04sec)
+#include <iostream>
+#include <math.h>
+using namespace std;
+int main()
+{
+    string bin;
+    int dec;
+    cin >> bin;
+    for (int i = 0; i < 32; i += 8) {
+        for (int j = 0; j < 8; j++) {
+            if (bin[i + j] - '0') dec += pow(2, 7 - j);
+        }
+        cout << dec << (i < 24 ? "." : "");
+        dec = 0;
+    }
+}
+
