@@ -1,0 +1,53 @@
+- nca
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+#define NN 10002
+
+struct Node {
+    vector<int> cld;
+    int par,dep;
+};
+
+Node nd[NN];
+
+int n, p, q;
+
+int GetRoot(int idx)
+{
+    if(nd[idx].par == 0) return idx;
+    return GetRoot(nd[idx].par);
+}
+
+void GetDepth(int idx, int d)
+{
+    nd[idx].dep = d;
+    for(auto k : nd[idx].cld) {
+        GetDepth(k,d+1);
+    }
+}
+
+int main()
+{
+    cin >> n;
+    for (int i = 0, a, b; i < n - 1; i++) {
+        cin >> a >> b;
+        nd[a].cld.push_back(b);
+        nd[b].par = a;
+    }
+    cin >> p >> q;
+    int root = GetRoot(p);
+    GetDepth(root, 1);
+
+    if(nd[p].dep > nd[q].dep) swap(p, q);
+
+    while (nd[p].dep != nd[q].dep) q = nd[q].par;
+    while (p != q)
+        p = nd[p].par,
+        q = nd[q].par;
+
+    cout << p;
+
+}
