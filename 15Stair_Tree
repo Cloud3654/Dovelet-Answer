@@ -1,25 +1,45 @@
+- postorder
+#include <iostream>
+using namespace std;
+int a[100]; // a(트리) 생성
+void preorder(int idx) // preorder 입력
+{
+    cin >> a[idx]; // a의 preorder식 idx번째 입력
+    if(a[idx] == -1) return; // 입력값이 -1이면(후손이 없으면) 함수 종료
+    preorder(idx * 2); // a의 idx * 2(lcld)를 인수로 preorder 호출
+    preorder(idx * 2 + 1); // a의 idx * 2 + 1(rcld)를 인수로 preorder 호출
+}
+void postorder(int idx) // postorder 출력
+{
+    if (a[idx] == -1) return; // idx가 -1이면(없는 값이면)
+    postorder(idx * 2);
+    postorder(idx * 2 + 1);
+    cout << a[idx] << " ";
+}
+int main()
+{
+    preorder(1); cout << endl;
+    postorder(1); cout << endl;
+    return 0;
+}
+
 - nca
 #include <iostream>
 #include <vector>
 #include <algorithm>
 using namespace std;
 #define NN 10002
-
 struct Node { // Node 변수형 생성
     vector<int> cld; // cld(변수의 자식 노드 목록) 생성
     int par,dep; // par(변수의 부모 노드), dep(트리에서 변수의 깊이) 생성
 };
-
 Node nd[NN]; // nd(트리) 생성
-
 int n, p, q; // n(노드의 수), p, q(nca를 구할 두 노드) 생성
-
 int GetRoot(int idx) //Root 구하기
 {
     if(nd[idx].par == 0) return idx; // 부모 노드가 0(부모 노드 없음, 즉 루트)이면 idx 반환
     return GetRoot(nd[idx].par); // 루트가 아니면 idx의 부모 노드를 새 GetRoot 함수의 인수로 넣어 호출
 }
-
 void GetDepth(int idx, int d) // 초기 인수 idx와 idx의 모든 후손 노드의 깊이 구하기
 {
     nd[idx].dep = d; // idx의 깊이를 d로 설정
@@ -27,7 +47,6 @@ void GetDepth(int idx, int d) // 초기 인수 idx와 idx의 모든 후손 노�
         GetDepth(k,d + 1); // d + 1을 새 GetDepth 함수의 두번째 인수로 넣어 호출
     }
 }
-
 int main()
 {
     cin >> n; // n(노드의 수)를 입력
@@ -49,10 +68,4 @@ int main()
         q = nd[q].par; // q를 q의 부모 노드로 변경
 
     cout << p; // p 출력 (p는 q와 같고, p와 q는 같아질 때까지 서로의 부모 노드로 변경되었기 때문에, p와 q는 입력받은 당시 p와 q의 nca의 값을 가지고 있다.)
-}
-
-        q = nd[q].par;
-
-    cout << p;
-
 }
