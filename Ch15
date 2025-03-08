@@ -1,51 +1,56 @@
 - nca
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
 using namespace std;
 #define NN 10002
 
-struct Node {
-    vector<int> cld;
-    int par,dep;
+struct Node { // Node 변수형 생성
+    vector<int> cld; // cld(변수의 자식 노드 목록) 생성
+    int par,dep; // par(변수의 부모 노드), dep(트리에서 변수의 깊이) 생성
 };
 
-Node nd[NN];
+Node nd[NN]; // nd(트리) 생성
 
-int n, p, q;
+int n, p, q; // n(노드의 수), p, q(nca를 구할 두 노드) 생성
 
-int GetRoot(int idx)
+int GetRoot(int idx) //Root 구하기
 {
-    if(nd[idx].par == 0) return idx;
-    return GetRoot(nd[idx].par);
+    if(nd[idx].par == 0) return idx; // 부모 노드가 0(부모 노드 없음, 즉 루트)이면 idx 반환
+    return GetRoot(nd[idx].par); // 루트가 아니면 idx의 부모 노드를 새 GetRoot 함수의 인수로 넣어 호출
 }
 
-void GetDepth(int idx, int d)
+void GetDepth(int idx, int d) // 초기 인수 idx와 idx의 모든 후손 노드의 깊이 구하기
 {
-    nd[idx].dep = d;
-    for(auto k : nd[idx].cld) {
-        GetDepth(k,d+1);
+    nd[idx].dep = d; // idx의 깊이를 d로 설정
+    for(auto k : nd[idx].cld) { // idx의 모든 자식 노드에 대해 반복
+        GetDepth(k,d + 1); // d + 1을 새 GetDepth 함수의 두번째 인수로 넣어 호출
     }
 }
 
 int main()
 {
-    cin >> n;
-    for (int i = 0, a, b; i < n - 1; i++) {
-        cin >> a >> b;
-        nd[a].cld.push_back(b);
-        nd[b].par = a;
+    cin >> n; // n(노드의 수)를 입력
+    for (int i = 0, a, b; i < n - 1; i++) { // n - 1번 반복
+        cin >> a >> b; // 트리를 구성할 노드 일부 a, b를 입력
+        nd[a].cld.push_back(b); // a의 자식 노드 목록에 b 추가
+        nd[b].par = a; // b의 부모 노드를 a로 설정
     }
-    cin >> p >> q;
-    int root = GetRoot(p);
-    GetDepth(root, 1);
+    cin >> p >> q; // nca를 구할 두 노드 p, q를 입력
+    int root = GetRoot(p); // root를 GetRoot 함수로 구하기
+    GetDepth(root, 1); // root와 root의 후손 노드(모든 노드)의 깊이 구하기
 
-    if(nd[p].dep > nd[q].dep) swap(p, q);
+    if(nd[p].dep > nd[q].dep) swap(p, q); // p의 깊이가 더 깊으면 p, q를 서로 변경
 
-    while (nd[p].dep != nd[q].dep) q = nd[q].par;
-    while (p != q)
-        p = nd[p].par,
+    while (nd[p].dep != nd[q].dep) // p, q의 깊이가 같아질 때까지
+        q = nd[q].par; // q를 q의 부모 노드로 변경
+    while (p != q) // p, q가 같아질 때까지
+        p = nd[p].par; // p를 p의 부모 노드로 변경
+        q = nd[q].par; // q를 q의 부모 노드로 변경
+
+    cout << p; // p 출력 (p는 q와 같고, p와 q는 같아질 때까지 서로의 부모 노드로 변경되었기 때문에, p와 q는 입력받은 당시 p와 q의 nca의 값을 가지고 있다.)
+}
+
         q = nd[q].par;
 
     cout << p;
